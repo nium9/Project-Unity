@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class ComputerController : MonoBehaviour
 {
     public float moveSpeed;
     //public Rigidbody theRB;
@@ -13,9 +11,6 @@ public class PlayerController : MonoBehaviour
     public float gravityScale;
 
     private Vector3 moveDirection;
-
-
-    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +32,13 @@ public class PlayerController : MonoBehaviour
         {
             theRB.velocity = new Vector3(theRB.velocity.x, jumpForce, theRB.velocity.z);
         }
-        */
+       
 
         //moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, Input.GetAxis("Vertical") * moveSpeed);
 
         float yStore = moveDirection.y;
-        moveDirection = (transform.forward*Input.GetAxis("Vertical")) + (transform.right * Input.GetAxis("Horizontal")); // ie change position facing.
-        moveDirection = moveDirection.normalized *  moveSpeed;
+        moveDirection = (transform.forward * Input.GetAxis("Vertical")) + (transform.right * Input.GetAxis("Horizontal")); // ie change position facing.
+        moveDirection = moveDirection.normalized * moveSpeed;
         moveDirection.y = yStore;
         if (controller.isGrounded)
         {
@@ -59,9 +54,8 @@ public class PlayerController : MonoBehaviour
         }
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale); // dont need time.deltatime due to gravityScale
         controller.Move(moveDirection * Time.deltaTime);// the reason for time .deltatime is show it doesnt do the movement every frame if it does it like that then it becomes sparactic
-        anim.SetBool("isGrounded", controller.isGrounded);
-        anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Vertical"))  + Mathf.Abs(Input.GetAxis("Horizontal")))  );
-    
-    
+     */
+
     }
+
 }
