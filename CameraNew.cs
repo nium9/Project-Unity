@@ -24,19 +24,24 @@ public class CameraNew : MonoBehaviour // this is the same as saying to implemen
             offset = target_player.position - transform.position;
         }
         Pivot.transform.position = target_player.transform.position;
-        Pivot.transform.parent = target_player.transform;
+        //Pivot.transform.parent = target_player.transform;
+        Pivot.transform.parent = null;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+
+        Pivot.transform.position = target_player.transform.position;
+        
         // get x positon and mouse and rotate to target
 
         float horizontal = Input.GetAxis("Mouse X")*rotateSpeed; // get x position for mouse.
-        target_player.Rotate(0, -horizontal, 0);
+        Pivot.Rotate(0, -horizontal, 0);
 
-
+        
         //get the y pos of mouse and rotate based on pivot.
         float verticle = Input.GetAxis("Mouse Y") * rotateSpeed;
 
@@ -69,7 +74,7 @@ public class CameraNew : MonoBehaviour // this is the same as saying to implemen
 
         // move camera based on horizontal & offset
         float desiredXAngle = Pivot.eulerAngles.x;
-        float desiredYAngle = target_player.eulerAngles.y;
+        float desiredYAngle = Pivot.eulerAngles.y;
         Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0);
         transform.position = target_player.position - (rotation*offset);
         
